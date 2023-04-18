@@ -16,12 +16,34 @@ void main()
 #endif // POINTERS_BASICS
 	const int n = 5;
 	int arr[n] = { 3,5,8,13,21 };
-	cout << arr << endl;
-	cout << *arr << endl;
+	cout << "Массив: " << arr << endl;
+	cout << "Массив разыменован: " << *arr << endl;
+
+    cout << "Массив +: ";
 	for (int i = 0; i < n; i++)
 	{
 		cout << arr + i << "\t";
 	}
 	cout << endl;
+
+	cout << "Массив -: ";
+	for (int i = 0; i < n; i++)
+	{
+		cout << arr - i << "\t";
+	}
+	cout << endl;
+
+	cout << "Массив разыменован +: ";
+	for (int i = 0; i < n; i++)
+	{
+		cout << *arr+i << "\t";
+	}
+	cout << endl;
+
+	cout << "Массив разыменован -: ";
+	for (int i = 0; i < n; i++)
+	{
+		cout << *arr - i << "\t";
+	}
 }
  
