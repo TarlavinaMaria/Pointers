@@ -26,24 +26,11 @@ void main()
 	}
 	cout << endl;
 
-	cout << "Массив -: ";
-	for (int i = 0; i < n; i++)
-	{
-		cout << arr - i << "\t";
-	}
-	cout << endl;
-
 	cout << "Массив разыменован +: ";
 	for (int i = 0; i < n; i++)
 	{
-		cout << *arr+i << "\t";
+		cout << *(arr+i) << "\t";
 	}
 	cout << endl;
-
-	cout << "Массив разыменован -: ";
-	for (int i = 0; i < n; i++)
-	{
-		cout << *arr - i << "\t";
-	}
 }
  
