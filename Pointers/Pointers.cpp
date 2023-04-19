@@ -19,18 +19,21 @@ void main()
 	cout << "Массив: " << arr << endl;
 	cout << "Массив разыменован: " << *arr << endl;
 
-    cout << "Массив +: ";
 	for (int i = 0; i < n; i++)
 	{
 		cout << arr + i << "\t";
 	}
 	cout << endl;
 
-	cout << "Массив разыменован +: ";
 	for (int i = 0; i < n; i++)
 	{
 		cout << *(arr+i) << "\t";
 	}
 	cout << endl;
+
+	for (int* p_arr = arr; *p_arr != 0xCCCCCCCC; p_arr++)
+	{
+		cout << *p_arr << "\t";
+	}
 }
  
