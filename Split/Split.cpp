@@ -12,22 +12,42 @@ void Split(int arr[], const int n);
 void main()
 {
 	setlocale(LC_ALL, "");
-	int n;
-	cout << "Введите размер массива: "; cin >> n;
-	int* arr = new int[n];
+	const int n = 10;
+	int arr[n];
 	
 	FillRand(arr, n);
 	Print(arr, n);
-	Split(arr, n);
-	
-	delete[] arr;
+	// Вычисляем размеры массивов:
+	int even_count = 0;
+	int odd_count = 0;
+	for (int i = 0; i < n; i++)
+	{
+		if (arr[i] % 2 == 0) even_count++;
+		else odd_count++;
+	}
+	// Выделяем память под массивы
+	int* even_arr = new int[even_count];
+	int* odd_arr = new int[odd_count];
+
+	// Копируем значения в соответствующие массивы:
+	for (int i = 0, j = 0, k = 0 ; i < n; i++)
+	{
+		/*if (arr[i] % 2 == 0)even_arr[j++] = arr[i];
+		else odd_arr[k++] = arr[i];*/
+		(arr[i] % 2 == 0 ? even_arr[j++] : odd_arr[k++]) = arr[i];
+	}
+	Print(even_arr, even_count);
+	Print(odd_arr, odd_count);
+
+	delete[] odd_arr;
+	delete[] even_arr;
 }
 
 void FillRand(int arr[], const int n)
 {
 	for (int i = 0; i < n; i++)
 	{
-		*(arr + i) = rand() % 100;
+		arr[i] = rand() % 100;
 	}
 }
 
@@ -41,25 +61,5 @@ void Print(int arr[], const int n)
 }
 void Split(int arr[], const int n)
 {
-	int* odd = new int[n];
-	int* even = new int[n];
-	int oddcnt = 0;
-	int evencnt = 0;
-
-	for (int i = 0; i < n; i++)
-	{
-		if (arr[i] % 2)
-		{
-			odd[oddcnt++] = arr[i];
-		}
-		else
-		{
-			even[evencnt++] = arr[i];
-		}
-	}
-	cout << "odd:" << *odd << endl;
-	cout << "even:" << *even << endl;
-
-	delete[] odd;
-	delete[] even;
+	
 }
