@@ -1,4 +1,4 @@
-#include<iostream>
+ï»¿#include<iostream>
 #include <string>
 #include <iomanip>
 
@@ -13,7 +13,7 @@ void main()
 {
 	setlocale(LC_ALL, "");
 	int n;
-	cout << "Ââåäèòå ðàçìåð ìàññèâà: "; cin >> n;
+	cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ñ€Ð°Ð·Ð¼ÐµÑ€ Ð¼Ð°ÑÑÐ¸Ð²Ð°: "; cin >> n;
 	int* arr = new int[n];
 	
 	FillRand(arr, n);
