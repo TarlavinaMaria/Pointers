@@ -12,6 +12,13 @@ void main()
 	int* arr = new int[n];
 	FillRand(arr, n);
 	Print(arr, n);
+
+	int value;
+	cout << "¬ведите добавл€емое значение: "; cin >> value;
+	arr[n] = value;
+	n++;
+	Print(arr, n);
+
 	delete[] arr;
 }
 

@@ -6,7 +6,6 @@ using namespace std;
 
 void FillRand(int arr[], const int n);
 void Print(int arr[], const int n);
-void Split(int arr[], const int n);
 
 
 void main()
@@ -59,7 +58,4 @@ void Print(int arr[], const int n)
 	}
 	cout << endl;
 }
-void Split(int arr[], const int n)
-{
-	
-}
+
