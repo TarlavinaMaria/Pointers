@@ -3,6 +3,7 @@ using namespace std;
 
 void FillRand(int arr[], const int n);
 void Print(int arr[], const int n);
+void Push_back(int arr[], int n);
 
 void main()
 {
@@ -12,7 +13,30 @@ void main()
 	int* arr = new int[n];
 	FillRand(arr, n);
 	Print(arr, n);
+	Push_back(arr, n);
 
+	
+}
+
+void FillRand(int arr[], const int n)
+{
+	for (int i = 0; i < n; i++)
+	{
+		*(arr + i) = rand() % 100;
+	}
+}
+
+void Print(int arr[], const int n)
+{
+	for (int i = 0; i < n; i++)
+	{
+		cout << arr[i] << "\t";
+	}
+	cout << endl;
+}
+
+void Push_back(int arr[], int n)
+{
 	int value; // Добавляемое значение в value
 	cout << "Введите добавляемое значение: "; cin >> value;
 	// 1) Создаем буферный массив нужного размера (на 1 элемент больше)
@@ -35,21 +59,4 @@ void main()
 	Print(arr, n);
 
 	delete[] arr;
-}
-
-void FillRand(int arr[], const int n)
-{
-	for (int i = 0; i < n; i++)
-	{
-		*(arr + i) = rand() % 100;
-	}
-}
-
-void Print(int arr[], const int n)
-{
-	for (int i = 0; i < n; i++)
-	{
-		cout << arr[i] << "\t";
-	}
-	cout << endl;
 }
