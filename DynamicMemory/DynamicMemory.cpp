@@ -21,7 +21,8 @@ void main()
 	//Push_back(arr, n);
 	//Push_front(arr, n);
 	//Insert(arr, n);
-	Pop_back(arr, n);
+	//Pop_back(arr, n);
+	Pop_front(arr, n);
 
 
 	
