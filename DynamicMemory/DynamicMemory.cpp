@@ -6,18 +6,21 @@ void Print(int arr[], const int n);
 
 int* Push_back(int* arr, int& n, int value);
 int* Push_front(int* arr, int& n, int value);
-
-
 int* Insert(int* arr, int& n, int value, int index);
 
+int* Pop_back(int* arr, int& n);
+int* Pop_front(int* arr, int& n);
+int* Erase(int* arr, int& n);
 
-
-
+//#define DYNAMIC_MEMORY1
+#define DYNAMIC_MEMORY2
 
 
 void main()
 {
 	setlocale(LC_ALL, "");
+
+#ifdef DYNAMIC_MEMORY1
 	int n;
 	cout << "Введите размер массива: "; cin >> n;
 	int* arr = new int[n];
@@ -34,12 +37,31 @@ void main()
 	Print(arr, n);
 
 	int index;
-	cout << "Введите добавляемое значение массива: "; cin >> value;
 	cout << "Введите индекс добавляемого элемента: "; cin >> index;
+	cout << "Введите добавляемое значение массива: "; cin >> value;
 	arr = Insert(arr, n, value, index);
 	Print(arr, n);
 
+	arr = Pop_back(arr, n);
+	Print(arr, n);
+	
+	arr = Pop_front(arr, n);
+	Print(arr, n);
+
 	delete[] arr;
+#endif // DYNAMIC_MEMORY1
+#ifdef DYNAMIC_MEMORY2
+
+
+
+
+
+
+
+
+
+#endif // DYNAMIC_MEMORY2
+
 }
 
 void FillRand(int arr[], const int n)
@@ -111,4 +133,41 @@ int* Insert(int* arr, int& n, int value, int index)
 	arr[index] = value;
 	n++;
 	return arr;
+}
+
+int* Pop_back(int* arr, int& n)
+{
+	/*int* buffer = new int[n - 1];
+	for (int i = 0; i < n - 1; i++)
+	{
+		buffer[i] = arr[i];
+	}
+	delete[] arr;
+	arr = buffer;
+	n--;
+	return arr;*/
+
+	int* buffer = new int[--n];
+	for (int i = 0; i < n; i++)
+	{
+		buffer[i] = arr[i];
+	}
+		delete[] arr;
+		return buffer;
+}
+
+int* Pop_front(int* arr, int& n)
+{
+	int* buffer = new int[--n];
+	for (int i = 0; i < n; i++)
+	{
+		buffer[i] = arr[i+1];
+	}
+	delete[] arr;
+	return buffer;
+}
+
+int* Erase(int* arr, int& n)
+{
+	return 0;
 }
