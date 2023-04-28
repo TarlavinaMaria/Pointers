@@ -3,7 +3,7 @@ using namespace std;
 
 void FillRand(int arr[], const int n);
 void Print(int arr[], const int n);
-//void Push_back(int arr[], int n);
+void Push_back(int arr[], int n);
 void Push_front(int arr[], int n);
 
 
