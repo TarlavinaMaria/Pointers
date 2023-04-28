@@ -3,11 +3,16 @@ using namespace std;
 
 void FillRand(int arr[], const int n);
 void Print(int arr[], const int n);
-void Push_back(int arr[], int n);
-void Push_front(int arr[], int n);
-void Insert(int arr[], int n);
-void Pop_back(int arr[], int n);
-void Pop_front(int arr[], int n);
+
+int* Push_back(int* arr, int& n, int value);
+int* Push_front(int* arr, int& n, int value);
+
+
+int* Insert(int* arr, int& n, int value, int index);
+
+
+
+
 
 
 void main()
@@ -18,14 +23,23 @@ void main()
 	int* arr = new int[n];
 	FillRand(arr, n);
 	Print(arr, n);
-	//Push_back(arr, n);
-	//Push_front(arr, n);
-	//Insert(arr, n);
-	//Pop_back(arr, n);
-	Pop_front(arr, n);
 
+	int value; // Добавляемое значение в value
+	cout << "Введите добавляемое значение массива: "; cin >> value;
+	arr = Push_back(arr, n, value);
+	Print(arr, n);
 
-	
+	cout << "Введите добавляемое значение массива: "; cin >> value;
+	arr = Push_front(arr, n, value);
+	Print(arr, n);
+
+	int index;
+	cout << "Введите добавляемое значение массива: "; cin >> value;
+	cout << "Введите индекс добавляемого элемента: "; cin >> index;
+	arr = Insert(arr, n, value, index);
+	Print(arr, n);
+
+	delete[] arr;
 }
 
 void FillRand(int arr[], const int n)
@@ -45,10 +59,8 @@ void Print(int arr[], const int n)
 	cout << endl;
 }
 
-void Push_back(int arr[], int n)
+int* Push_back(int* arr, int& n, int value)
 {
-	int value; // Добавляемое значение в value
-	cout << "Введите добавляемое значение в конец массива: "; cin >> value;
 	// 1) Создаем буферный массив нужного размера (на 1 элемент больше)
 	int* buffer = new int[n + 1];
 	// 2) Копируем все значения с исходного массива в буферный:
@@ -66,80 +78,37 @@ void Push_back(int arr[], int n)
 	// 6) После добавления элемента в массив кол-во его элементов увеличивается на 1:
 	n++;
 	// 7) Mission complete - элемент добавлен
-	Print(arr, n);
-	
-	delete [] arr;
+	return arr;
 }
 
-void Push_front(int arr[], int n)
+int* Push_front(int* arr, int& n, int value)
 {
-	int value;
-	cout << "Введите добавляемое значение в начало массива: "; cin >> value;
-	int* buffer = new int[n + 2];
-	for (int i = 0; i < n; i++)
-	{
-		buffer[i] = arr[i];
-	}
-	delete[] arr;
-	arr = buffer;
-	buffer = nullptr; 
-
-	int number = 1;
-	for (int i = 0; i < number; i++)
-	{
-		int Buffer = arr[n-1];
-		for (int i = n-1; i > 0; i--)
-		{
-			arr[i] = arr[i - 1];
-		}
-		arr[0] = Buffer;
-	}
-	arr[0] = value;
-
-
-	Print(arr, n);
-
-	delete[] arr;
-}
-
-void Insert(int arr[], int n)
-{
-	int value;
-	int number;
-	cout << "Введите добавляемое значение в массива: "; cin >> value;
-	cout << "Введите индекс: "; cin >> number;
 	int* buffer = new int[n + 1];
+	buffer[0] = value;
 	for (int i = 0; i < n; i++)
 	{
-		buffer[i] = arr[i];
+		buffer[i + 1] = arr[i];
 	}
 	delete[] arr;
 	arr = buffer;
-	buffer = nullptr;
+	n++;
+	return arr;
+}
 
-	// C костылями
-	switch (number)
+int* Insert(int* arr, int& n, int value, int index)
+{
+	int* buffer = new int[n + 1];
+	for (int i = 0; i < index; i++)
 	{
-	case (1): arr[0] = value; break;
-	case (2): arr[n-4] = value; break;
-	case (3): arr[n-3] = value; break;
-	case (4): arr[n-2] = value; break;
-	case (5): arr[n] = value; break;
+		buffer[i] = arr[i];
 	}
-	
-
-	Print(arr, n);
-
+	for (int i = index; i < n; i++)
+	{
+		buffer[i + 1] = arr[i];
+	} 
 	delete[] arr;
-}
-
-void Pop_back(int arr[], int n)
-{
-	n--;
-	Print(arr, n);
-}
-
-void Pop_front(int arr[], int n)
-{
-
+	arr = buffer;
+	arr[index] = value;
+	n++;
+	return arr;
 }
