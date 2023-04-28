@@ -1,8 +1,16 @@
 ﻿#include<iostream>
 using namespace std;
+using std::cin;
+using std::cout;
+using std::endl;
+
 
 void FillRand(int arr[], const int n);
+void FillRand(int** arr, const int rows, const int cols);
+
 void Print(int arr[], const int n);
+void Print(int** arr, const int rows, const int cols);
+
 
 int* Push_back(int* arr, int& n, int value);
 int* Push_front(int* arr, int& n, int value);
@@ -52,8 +60,25 @@ void main()
 #endif // DYNAMIC_MEMORY1
 #ifdef DYNAMIC_MEMORY2
 
+	int rows, cols;
+	cout << "Введите количество строк: "; cin >> rows;
+	cout << "Введите количество строк: "; cin >> cols;
+	int** arr = new int* [rows];
+	for (int i = 0; i < rows; i++)
+	{
+		arr[i] = new int[cols];
+	}
+	
+	FillRand(arr, rows, cols);
+	Print(arr, rows, cols);
 
-
+	// 1) Удаляем строки:
+	for (int i = 0; i < rows; i++)
+	{
+		delete[] arr[i];
+	}
+	// 2) Удаляем указатели:
+	delete[] arr;
 
 
 
@@ -72,6 +97,17 @@ void FillRand(int arr[], const int n)
 	}
 }
 
+void FillRand(int** arr, const int rows, const int cols)
+{
+	for (int i = 0; i < rows; i++)
+	{
+		for (int j = 0; j < cols; j++)
+		{
+			arr[i][j] = rand() % 100;
+		}
+	}
+}
+
 void Print(int arr[], const int n)
 {
 	for (int i = 0; i < n; i++)
@@ -79,6 +115,17 @@ void Print(int arr[], const int n)
 		cout << arr[i] << "\t";
 	}
 	cout << endl;
+}
+void Print(int** arr, const int rows, const int cols)
+{
+	for (int i = 0; i < rows; i++)
+	{
+		for (int j = 0; j < cols; j++)
+		{
+			cout << arr[i][j] << "\t";
+		}
+		cout << endl;
+	}
 }
 
 int* Push_back(int* arr, int& n, int value)
