@@ -63,6 +63,7 @@ void main()
 	int rows, cols;
 	cout << "Введите количество строк: "; cin >> rows;
 	cout << "Введите количество строк: "; cin >> cols;
+
 	int** arr = new int* [rows];
 	for (int i = 0; i < rows; i++)
 	{
@@ -79,10 +80,6 @@ void main()
 	}
 	// 2) Удаляем указатели:
 	delete[] arr;
-
-
-
-
 
 
 #endif // DYNAMIC_MEMORY2
