@@ -5,6 +5,7 @@ void FillRand(int arr[], const int n);
 void Print(int arr[], const int n);
 void Push_back(int arr[], int n);
 void Push_front(int arr[], int n);
+void Insert(int arr[], int n);
 
 
 void main()
@@ -17,6 +18,7 @@ void main()
 	Print(arr, n);
 	//Push_back(arr, n);
 	//Push_front(arr, n);
+	Insert(arr, n);
 
 	
 }
@@ -89,6 +91,36 @@ void Push_front(int arr[], int n)
 	}
 	arr[0] = value;
 
+
+	Print(arr, n);
+
+	delete[] arr;
+}
+
+void Insert(int arr[], int n)
+{
+	int value;
+	int number;
+	cout << "Введите добавляемое значение в массива: "; cin >> value;
+	cout << "Введите индекс: "; cin >> number;
+	int* buffer = new int[n + 1];
+	for (int i = 0; i < n; i++)
+	{
+		buffer[i] = arr[i];
+	}
+	delete[] arr;
+	arr = buffer;
+	buffer = nullptr;
+	// C костылями
+	switch (number)
+	{
+	case (1): arr[0] = value; break;
+	case (2): arr[n-4] = value; break;
+	case (3): arr[n-3] = value; break;
+	case (4): arr[n-2] = value; break;
+	case (5): arr[n] = value; break;
+	}
+	
 
 	Print(arr, n);
 
