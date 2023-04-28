@@ -6,6 +6,8 @@ void Print(int arr[], const int n);
 void Push_back(int arr[], int n);
 void Push_front(int arr[], int n);
 void Insert(int arr[], int n);
+void Pop_back(int arr[], int n);
+void Pop_front(int arr[], int n);
 
 
 void main()
@@ -18,7 +20,9 @@ void main()
 	Print(arr, n);
 	//Push_back(arr, n);
 	//Push_front(arr, n);
-	Insert(arr, n);
+	//Insert(arr, n);
+	Pop_back(arr, n);
+
 
 	
 }
@@ -111,6 +115,7 @@ void Insert(int arr[], int n)
 	delete[] arr;
 	arr = buffer;
 	buffer = nullptr;
+
 	// C костылями
 	switch (number)
 	{
@@ -125,4 +130,15 @@ void Insert(int arr[], int n)
 	Print(arr, n);
 
 	delete[] arr;
+}
+
+void Pop_back(int arr[], int n)
+{
+	n--;
+	Print(arr, n);
+}
+
+void Pop_front(int arr[], int n)
+{
+
 }
