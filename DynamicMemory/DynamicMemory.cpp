@@ -218,16 +218,16 @@ int* Pop_front(int* arr, int& n)
 
 int* Erase(int* arr, int& n, int index)
 {
-	int* buffer = new int[n--];
+	int* buffer = new int[n - 1];
 	for (int i = 0; i < index; i++)
 	{
 		buffer[i] = arr[i];
 	}
-	for (int i = index; i < n; i++)
+	for (int i = index + 1; i < n; i++)
 	{
-		buffer[i + 1] = arr[i];
+		buffer[i - 1] = arr[i];
 	}
 	delete[] arr;
-	return buffer;
 
+	return buffer;
 }
