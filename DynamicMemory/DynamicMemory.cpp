@@ -18,7 +18,7 @@ int* Insert(int* arr, int& n, int value, int index);
 
 int* Pop_back(int* arr, int& n);
 int* Pop_front(int* arr, int& n);
-int* Erase(int* arr, int& n);
+int* Erase(int* arr, int& n, int index);
 
 //#define DYNAMIC_MEMORY1
 #define DYNAMIC_MEMORY2
@@ -54,10 +54,15 @@ void main()
 	Print(arr, n);
 	
 	arr = Pop_front(arr, n);
+	Print(arr, n);	
+
+	cout << "Введите индекс удаляемого элемента: "; cin >> index;
+	arr = Erase(arr, n, index);
 	Print(arr, n);
 
 	delete[] arr;
 #endif // DYNAMIC_MEMORY1
+
 #ifdef DYNAMIC_MEMORY2
 
 	int rows, cols;
@@ -211,7 +216,18 @@ int* Pop_front(int* arr, int& n)
 	return buffer;
 }
 
-int* Erase(int* arr, int& n)
+int* Erase(int* arr, int& n, int index)
 {
-	return 0;
+	int* buffer = new int[n--];
+	for (int i = 0; i < index; i++)
+	{
+		buffer[i] = arr[i];
+	}
+	for (int i = index; i < n; i++)
+	{
+		buffer[i + 1] = arr[i];
+	}
+	delete[] arr;
+	return buffer;
+
 }
