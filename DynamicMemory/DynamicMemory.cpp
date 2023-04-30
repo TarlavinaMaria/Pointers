@@ -5,12 +5,14 @@ using std::cout;
 using std::endl;
 
 
+void Allocate(int** arr, const int rows, const int cols); // выделяет память под двумерный динамический массив
+void Clear(int** arr, const int rows, const int cols); // удаляет двумерный динамический массив
+
 void FillRand(int arr[], const int n);
 void FillRand(int** arr, const int rows, const int cols);
 
 void Print(int arr[], const int n);
 void Print(int** arr, const int rows, const int cols);
-
 
 int* Push_back(int* arr, int& n, int value);
 int* Push_front(int* arr, int& n, int value);
@@ -29,6 +31,7 @@ void main()
 	setlocale(LC_ALL, "");
 
 #ifdef DYNAMIC_MEMORY1
+	// Одномерные динамические массивы
 	int n;
 	cout << "Введите размер массива: "; cin >> n;
 	int* arr = new int[n];
@@ -64,20 +67,33 @@ void main()
 #endif // DYNAMIC_MEMORY1
 
 #ifdef DYNAMIC_MEMORY2
-
+	// Двумерные динамические массивы
 	int rows, cols;
 	cout << "Введите количество строк: "; cin >> rows;
 	cout << "Введите количество строк: "; cin >> cols;
-
 	int** arr = new int* [rows];
+
+	Allocate(arr, rows, cols);
+	FillRand(arr, rows, cols);
+	Print(arr, rows, cols);
+
+	Clear(arr, rows, cols);
+
+
+#endif // DYNAMIC_MEMORY2
+
+}
+
+void Allocate(int** arr, const int rows, const int cols)
+{
 	for (int i = 0; i < rows; i++)
 	{
 		arr[i] = new int[cols];
 	}
-	
-	FillRand(arr, rows, cols);
-	Print(arr, rows, cols);
+}
 
+void Clear(int** arr, const int rows, const int cols)
+{
 	// 1) Удаляем строки:
 	for (int i = 0; i < rows; i++)
 	{
@@ -85,10 +101,6 @@ void main()
 	}
 	// 2) Удаляем указатели:
 	delete[] arr;
-
-
-#endif // DYNAMIC_MEMORY2
-
 }
 
 void FillRand(int arr[], const int n)
@@ -231,3 +243,4 @@ int* Erase(int* arr, int& n, int index)
 
 	return buffer;
 }
+
