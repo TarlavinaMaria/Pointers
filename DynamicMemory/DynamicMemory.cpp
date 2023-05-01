@@ -21,8 +21,10 @@ int* Push_front(int* arr, int& n, int value);
 void Push_row_front(int **&arr, int& rows, const int cols); //добавляет пустую строку в начало двумерного динамического массива
 
 int* Insert(int* arr, int& n, int value, int index);
+void Insert_row(int**& arr, int& rows, const int cols, int index);
 
 int* Pop_back(int* arr, int& n);
+void Push_row_front(int**& arr, int& rows, const int cols);
 
 int* Pop_front(int* arr, int& n);
 
@@ -90,6 +92,12 @@ void main()
 	Push_row_front(arr, rows, cols);
 	Print(arr, rows, cols);
 
+	int index;
+	cout << "Введите индекс добавляемой строки: "; cin >> index;
+	Insert_row(arr, rows, cols, index);
+	Print(arr, rows, cols);
+
+	cout << "Удаляет последнюю строку  двумерного динамического массива: ";
 
 	Clear(arr, rows);
 #endif // DYNAMIC_MEMORY2
@@ -230,6 +238,22 @@ int* Insert(int* arr, int& n, int value, int index)
 	n++;
 	return arr;
 }
+void Insert_row(int**& arr, int& rows, const int cols, int index)
+{
+	int** buffer = new int* [rows + 1];
+	for (int i = 0; i < index; i++)
+	{
+		buffer[i] = arr[i];
+	}
+	for (int i = index; i < rows; i++)
+	{
+		buffer[i + 1] = arr[i];
+	}
+	delete[] arr;
+	arr = buffer;
+	arr[index] = new int[cols] {};
+	rows++;
+}
 
 int* Pop_back(int* arr, int& n)
 {
@@ -251,7 +275,10 @@ int* Pop_back(int* arr, int& n)
 		delete[] arr;
 		return buffer;
 }
+void Push_row_front(int**& arr, int& rows, const int cols)
+{
 
+}
 int* Pop_front(int* arr, int& n)
 {
 	int* buffer = new int[--n];
