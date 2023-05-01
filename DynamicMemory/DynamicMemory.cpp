@@ -18,10 +18,9 @@ int* Push_back(int* arr, int& n, int value);
 void Push_row_back(int **&arr, int& rows, const int cols); //добавляет пустую строку в конец двумерного динамического массива
 
 int* Push_front(int* arr, int& n, int value);
-void Push_row_front(int **&arr, int& rows, const int cols); //добавляет пустую строку в конец двумерного динамического массива
+void Push_row_front(int **&arr, int& rows, const int cols); //добавляет пустую строку в начало двумерного динамического массива
 
 int* Insert(int* arr, int& n, int value, int index);
-
 
 int* Pop_back(int* arr, int& n);
 
@@ -88,8 +87,8 @@ void main()
 	Push_row_back(arr, rows, cols);
 	Print(arr, rows, cols);
 	cout << "Добавляет пустую строку в начало двумерного динамического массива: " << endl;
-
-
+	Push_row_front(arr, rows, cols);
+	Print(arr, rows, cols);
 
 
 	Clear(arr, rows);
@@ -201,8 +200,17 @@ int* Push_front(int* arr, int& n, int value)
 	n++;
 	return arr;
 }
-void Push_row_front(int**& arr, int& rows, const int cols)
+void Push_row_front(int**& arr, int& rows, const int cols) //добавляет пустую строку в начало двумерного динамического массива
 {
+	int** buffer = new int* [rows + 1] {};
+	for (int i = 0; i < rows; i++)
+	{
+		buffer[i+1] = arr[i];
+	}
+	delete[] arr;
+	arr = buffer;
+	buffer[0] = new int[cols] {};
+	rows++;
 }
 
 int* Insert(int* arr, int& n, int value, int index)
