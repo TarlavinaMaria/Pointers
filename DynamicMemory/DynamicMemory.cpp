@@ -6,7 +6,7 @@ using std::endl;
 
 
 void Allocate(int** arr, const int rows, const int cols); // выделяет память под двумерный динамический массив
-void Clear(int** arr, const int rows, const int cols); // удаляет двумерный динамический массив
+void Clear(int** arr, const int rows); // удаляет двумерный динамический массив
 
 void FillRand(int arr[], const int n);
 void FillRand(int** arr, const int rows, const int cols);
@@ -15,11 +15,17 @@ void Print(int arr[], const int n);
 void Print(int** arr, const int rows, const int cols);
 
 int* Push_back(int* arr, int& n, int value);
+void Push_row_back(int** arr, int& rows, const int cols); //добавляет пустую строку в конец двумерного динамического массива
+
 int* Push_front(int* arr, int& n, int value);
+
 int* Insert(int* arr, int& n, int value, int index);
 
+
 int* Pop_back(int* arr, int& n);
+
 int* Pop_front(int* arr, int& n);
+
 int* Erase(int* arr, int& n, int index);
 
 //#define DYNAMIC_MEMORY1
@@ -77,14 +83,21 @@ void main()
 	FillRand(arr, rows, cols);
 	Print(arr, rows, cols);
 
-	Clear(arr, rows, cols);
+	cout << "Добавляет пустую строку в конец двумерного динамического массива: " << endl;
+	Push_row_back(arr, rows, cols);
+	FillRand(arr, rows, cols);
+	Print(arr, rows, cols);
 
 
+
+
+
+	Clear(arr, rows);
 #endif // DYNAMIC_MEMORY2
 
 }
 
-void Allocate(int** arr, const int rows, const int cols)
+void Allocate(int** arr, const int rows, const int cols) // выделяет память под двумерный динамический массив
 {
 	for (int i = 0; i < rows; i++)
 	{
@@ -92,7 +105,7 @@ void Allocate(int** arr, const int rows, const int cols)
 	}
 }
 
-void Clear(int** arr, const int rows, const int cols)
+void Clear(int** arr, const int rows) // удаляет двумерный динамический массив
 {
 	// 1) Удаляем строки:
 	for (int i = 0; i < rows; i++)
@@ -110,7 +123,6 @@ void FillRand(int arr[], const int n)
 		*(arr + i) = rand() % 100;
 	}
 }
-
 void FillRand(int** arr, const int rows, const int cols)
 {
 	for (int i = 0; i < rows; i++)
@@ -163,7 +175,18 @@ int* Push_back(int* arr, int& n, int value)
 	// 7) Mission complete - элемент добавлен
 	return arr;
 }
-
+void Push_row_back(int** arr, int& rows, const int cols)
+{
+	int** buffer = new int* [rows + 1];
+	for (int i = 0; i < rows; i++)
+	{
+		buffer[i] = arr[i];
+	}
+	delete[] arr;
+	arr = buffer;
+	buffer[rows] = new int[cols];
+	rows++;
+}
 int* Push_front(int* arr, int& n, int value)
 {
 	int* buffer = new int[n + 1];
