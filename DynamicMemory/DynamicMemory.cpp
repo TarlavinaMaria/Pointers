@@ -30,7 +30,7 @@ int* Pop_front(int* arr, int& n);
 void Pop_row_front(int**& arr, int& rows, const int cols); //удаляет нулевую строку двумерного динамического массива
 
 int* Erase(int* arr, int& n, int index);
-void Pop_row_front(int**& arr, int& rows, const int cols); //удаляет строку из двумерного динамического массива по заданному индексу
+void Pop_row_front(int**& arr, int& rows, const int cols, int index); //удаляет строку из двумерного динамического массива по заданному индексу
 
 
 //#define DYNAMIC_MEMORY1
@@ -109,6 +109,14 @@ void main()
 	Print(arr, rows, cols);
 
 	cout << "Введите индекс удаляемой строки: "; cin >> index;
+	Pop_row_front(arr, rows, cols, index);
+	Print(arr, rows, cols);
+
+
+
+
+
+
 
 	Clear(arr, rows);
 #endif // DYNAMIC_MEMORY2
@@ -337,7 +345,19 @@ int* Erase(int* arr, int& n, int index)
 
 	return buffer;
 }
-void Pop_row_front(int**& arr, int& rows, const int cols)
+void Pop_row_front(int**& arr, int& rows, const int cols, int index)
 {
-
+	int** buffer = new int* [rows + 1];
+	for (int i = 0; i < index; i++)
+	{
+		buffer[i] = arr[i];
+	}
+	for (int i = index; i < rows; i++)
+	{
+		buffer[i + 1] = arr[i];
+	}
+	delete[] arr;
+	arr = buffer;
+	arr[index] = new int[cols] {};
+	rows++;
 }
