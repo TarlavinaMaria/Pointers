@@ -21,14 +21,17 @@ int* Push_front(int* arr, int& n, int value);
 void Push_row_front(int **&arr, int& rows, const int cols); //добавляет пустую строку в начало двумерного динамического массива
 
 int* Insert(int* arr, int& n, int value, int index);
-void Insert_row(int**& arr, int& rows, const int cols, int index);
+void Insert_row(int**& arr, int& rows, const int cols, int index); 
 
 int* Pop_back(int* arr, int& n);
-void Push_row_front(int**& arr, int& rows, const int cols);
+void Pop_row_back(int**& arr, int& rows, const int cols); //удаляет последнюю строку двумерного динамического массива
 
 int* Pop_front(int* arr, int& n);
+void Pop_row_front(int**& arr, int& rows, const int cols); //удаляет нулевую строку двумерного динамического массива
 
 int* Erase(int* arr, int& n, int index);
+void Pop_row_front(int**& arr, int& rows, const int cols); //удаляет строку из двумерного динамического массива по заданному индексу
+
 
 //#define DYNAMIC_MEMORY1
 #define DYNAMIC_MEMORY2
@@ -97,7 +100,15 @@ void main()
 	Insert_row(arr, rows, cols, index);
 	Print(arr, rows, cols);
 
-	cout << "Удаляет последнюю строку  двумерного динамического массива: ";
+	cout << "Удаляет последнюю строку  двумерного динамического массива: " << endl;
+	Pop_row_back(arr, rows, cols);
+	Print(arr, rows, cols);
+
+	cout << "Удаляет нулевую строку  двумерного динамического массива: " << endl;
+	Pop_row_front(arr, rows, cols);
+	Print(arr, rows, cols);
+
+	cout << "Введите индекс удаляемой строки: "; cin >> index;
 
 	Clear(arr, rows);
 #endif // DYNAMIC_MEMORY2
@@ -275,10 +286,19 @@ int* Pop_back(int* arr, int& n)
 		delete[] arr;
 		return buffer;
 }
-void Push_row_front(int**& arr, int& rows, const int cols)
+void Pop_row_back(int**& arr, int& rows, const int cols) //удаляет последнюю строку двумерного динамического массива
 {
-
+	int** buffer = new int* [rows + 1];
+	for (int i = 0; i < rows; i++)
+	{
+		buffer[i] = arr[i];
+	}
+	delete[] arr;
+	arr = buffer;
+	arr[rows] = new int[cols] {};
+	rows++;
 }
+
 int* Pop_front(int* arr, int& n)
 {
 	int* buffer = new int[--n];
@@ -288,6 +308,18 @@ int* Pop_front(int* arr, int& n)
 	}
 	delete[] arr;
 	return buffer;
+}
+void Pop_row_front(int**& arr, int& rows, const int cols) //удаляет нулевую строку двумерного динамического массива
+{
+	int** buffer = new int* [rows + 1] {};
+	for (int i = 0; i < rows; i++)
+	{
+		buffer[i + 1] = arr[i];
+	}
+	delete[] arr;
+	arr = buffer;
+	arr[0] = new int[cols] {};
+	rows++;
 }
 
 int* Erase(int* arr, int& n, int index)
@@ -305,4 +337,7 @@ int* Erase(int* arr, int& n, int index)
 
 	return buffer;
 }
+void Pop_row_front(int**& arr, int& rows, const int cols)
+{
 
+}
