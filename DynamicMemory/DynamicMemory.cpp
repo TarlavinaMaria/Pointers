@@ -129,6 +129,14 @@ void main()
 	Insert_col(arr, rows, cols, index);
 	Print(arr, rows, cols);
 
+	cout << "Удаляет столбец с конца двумерного динамического массива: " << endl;
+	Pop_col_back(arr, rows, cols);
+	Print(arr, rows, cols);
+
+
+
+
+
 	Clear(arr, rows);
 #endif // DYNAMIC_MEMORY2
 
@@ -362,6 +370,20 @@ void Pop_row_back(int**& arr, int& rows, const int cols) //удаляет пос
 	arr = buffer;
 	arr[rows] = new int[cols] {};
 	rows++;
+}
+void Pop_col_back(int** arr, const int rows, int& cols) //удаляет столбец с конца двумерного динамического массива
+{
+	for (int i = 0; i < rows; i++)
+	{
+		int* buffer = new int[cols + 1] {};
+		for (int j = 0; j < cols; j++)
+		{
+			buffer[j] = arr[i][j];
+		}
+		delete[] arr[i];
+		arr[i] = buffer;
+	}
+	cols++;
 }
 
 int* Pop_front(int* arr, int& n)
