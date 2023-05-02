@@ -20,12 +20,15 @@ void Push_col_back(int** arr,const int rows,  int& cols); //добавляет �
 
 int* Push_front(int* arr, int& n, int value);
 void Push_row_front(int **&arr, int& rows, const int cols); //добавляет пустую строку в начало двумерного динамического массива
+void Push_col_front(int** arr, const int rows, int& cols); //добавляет пустой столбец в начало двумерного динамического массива
 
 int* Insert(int* arr, int& n, int value, int index);
-void Insert_row(int**& arr, int& rows, const int cols, int index); 
+void Insert_row(int**& arr, int& rows, const int cols, int index);  //вставляет пустую строку в двумерный динамический массив по заданному индексу
+void Insert_col(int** arr, const int rows, int& cols, int index); //вставляет пустой столбец в двумерный динамический массив по заданному индексу
 
 int* Pop_back(int* arr, int& n);
 void Pop_row_back(int**& arr, int& rows, const int cols); //удаляет последнюю строку двумерного динамического массива
+void Pop_col_back(int** arr, const int rows, int& cols); //удаляет столбец с конца двумерного динамического массива
 
 int* Pop_front(int* arr, int& n);
 void Pop_row_front(int**& arr, int& rows, const int cols); //удаляет нулевую строку двумерного динамического массива
@@ -117,9 +120,14 @@ void main()
 	Push_col_back(arr, rows, cols);
 	Print(arr, rows, cols);
 
-
-
-
+	cout << "Добавляет пустой столбец в начало двумерного динамического массива: " << endl;
+	Push_col_front(arr, rows, cols);
+	Print(arr, rows, cols);
+	
+	int index;
+	cout << "Введите индекс добавляемого столбца: "; cin >> index;
+	Insert_col(arr, rows, cols, index);
+	Print(arr, rows, cols);
 
 	Clear(arr, rows);
 #endif // DYNAMIC_MEMORY2
@@ -204,7 +212,7 @@ int* Push_back(int* arr, int& n, int value)
 	// 7) Mission complete - элемент добавлен
 	return arr;
 }
-void Push_row_back(int **& arr, int& rows, const int cols) //добавляет пустую строку в конец двумерного динамического массива
+void Push_row_back(int** &arr, int& rows, const int cols) //добавляет пустую строку в конец двумерного динамического массива
 {
 	int** buffer = new int* [rows + 1];
 	for (int i = 0; i < rows; i++)
@@ -230,6 +238,7 @@ void Push_col_back(int** arr, const int rows, int& cols) //добавляет п
 	}
 	cols++;
 }
+
 int* Push_front(int* arr, int& n, int value)
 {
 	int* buffer = new int[n + 1];
@@ -254,6 +263,20 @@ void Push_row_front(int**& arr, int& rows, const int cols) //добавляет 
 	arr = buffer;
 	buffer[0] = new int[cols] {};
 	rows++;
+}
+void Push_col_front(int** arr, const int rows, int& cols) //добавляет пустой столбец в начало двумерного динамического массива
+{
+	for (int i = 0; i < rows; i++)
+	{
+		int* buffer = new int[cols + 1] {};
+		for (int j = 0; j < cols; j++)
+		{
+			buffer[j+1] = arr[i][j];
+		}
+		delete[] arr[i];
+		arr[i] = buffer;
+	}
+	cols++;
 }
 
 int* Insert(int* arr, int& n, int value, int index)
@@ -288,6 +311,24 @@ void Insert_row(int**& arr, int& rows, const int cols, int index)
 	arr = buffer;
 	arr[index] = new int[cols] {};
 	rows++;
+}
+void Insert_col(int** arr, const int rows, int& cols, int index) //вставляет пустой столбец в двумерный динамический массив по заданному индексу
+{
+	for (int i = 0; i < rows; i++)
+	{
+		int* buffer = new int[cols + 1] {};
+		for (int j = 0; j < index; j++)
+		{
+			buffer[j] = arr[i][j];
+		}
+		for (int j = index; j < cols; j++)
+		{
+			buffer[j + 1] = arr[i][j];
+		}
+		delete[] arr[i];
+		arr[i] = buffer;
+	}
+	cols;
 }
 
 int* Pop_back(int* arr, int& n)
