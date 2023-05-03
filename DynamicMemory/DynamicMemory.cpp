@@ -86,7 +86,7 @@ void main()
 	// Двумерные динамические массивы
 	int rows, cols;
 	cout << "Введите количество строк: "; cin >> rows;
-	cout << "Введите количество строк: "; cin >> cols;
+	cout << "Введите количество столбцов: "; cin >> cols;
 	int** arr = new int* [rows];
 
 	Allocate(arr, rows, cols);
@@ -109,11 +109,11 @@ void main()
 	Pop_row_back(arr, rows, cols);
 	Print(arr, rows, cols);
 
-	/*cout << "Удаляет нулевую строку  двумерного динамического массива: " << endl;
+	cout << "Удаляет нулевую строку  двумерного динамического массива: " << endl;
 	Pop_row_front(arr, rows, cols);
 	Print(arr, rows, cols);
 
-	cout << "Введите индекс удаляемой строки: "; cin >> index;
+	/*cout << "Введите индекс удаляемой строки: "; cin >> index;
 	Erase_row(arr, rows, cols, index);
 	Print(arr, rows, cols);*/
 
@@ -401,15 +401,14 @@ int* Pop_front(int* arr, int& n)
 }
 void Pop_row_front(int**& arr, int& rows, const int cols) //удаляет нулевую строку двумерного динамического массива
 {
-	int** buffer = new int* [rows + 1] {};
+	int** buffer = new int* [rows --] {};
 	for (int i = 0; i < rows; i++)
 	{
-		buffer[i + 1] = arr[i];
+		buffer[i ] = arr[i+ 1];
 	}
 	delete[] arr;
 	arr = buffer;
-	arr[0] = new int[cols] {};
-	rows++;
+	
 }
 void Pop_col_front(int** arr, const int rows, int& cols) //удаляет столбец с начала двумерного динамического массива
 {
