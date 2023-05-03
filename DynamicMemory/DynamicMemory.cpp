@@ -93,7 +93,7 @@ void main()
 	FillRand(arr, rows, cols);
 	Print(arr, rows, cols);
 
-	cout << "Добавляет пустую строку в конец двумерного динамического массива: " << endl;
+	/*cout << "Добавляет пустую строку в конец двумерного динамического массива: " << endl;
 	Push_row_back(arr, rows, cols);
 	Print(arr, rows, cols);
 	cout << "Добавляет пустую строку в начало двумерного динамического массива: " << endl;
@@ -115,9 +115,9 @@ void main()
 
 	cout << "Введите индекс удаляемой строки: "; cin >> index;
 	Erase_row(arr, rows, cols, index);
-	Print(arr, rows, cols);
+	Print(arr, rows, cols);*/
 
-	/*cout << "Добавляет пустой столбец в конец двумерного динамического массива: " << endl;
+	cout << "Добавляет пустой столбец в конец двумерного динамического массива: " << endl;
 	Push_col_back(arr, rows, cols);
 	Print(arr, rows, cols);
 
@@ -130,9 +130,9 @@ void main()
 	Insert_col(arr, rows, cols, index);
 	Print(arr, rows, cols);
 
-	/*cout << "Удаляет столбец с конца двумерного динамического массива: " << endl;
+	cout << "Удаляет столбец с конца двумерного динамического массива: " << endl;
 	Pop_col_back(arr, rows, cols);
-	Print(arr, rows, cols);*/
+	Print(arr, rows, cols);
 
 	/*cout << "Удаляет столбец с начала двумерного динамического массива: " << endl;
 	Pop_col_front(arr, rows, cols);
