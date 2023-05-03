@@ -113,9 +113,9 @@ void main()
 	Pop_row_front(arr, rows, cols);
 	Print(arr, rows, cols);
 
-	/*cout << "Введите индекс удаляемой строки: "; cin >> index;
+	cout << "Введите индекс удаляемой строки: "; cin >> index;
 	Erase_row(arr, rows, cols, index);
-	Print(arr, rows, cols);*/
+	Print(arr, rows, cols);
 
 	/*cout << "Добавляет пустой столбец в конец двумерного динамического массива: " << endl;
 	Push_col_back(arr, rows, cols);
@@ -434,15 +434,15 @@ int* Erase(int* arr, int& n, int index)
 	}
 	for (int i = index + 1; i < n; i++)
 	{
-		buffer[i - 1] = arr[i];
+		buffer[i + 1] = arr[i];
 	}
 	delete[] arr;
-
+	arr = buffer;
 	return buffer;
 }
 void Erase_row(int**& arr, int& rows, const int cols, int index)
 {
-	int** buffer = new int* [rows + 1];
+	int** buffer = new int* [rows --];
 	for (int i = 0; i < index; i++)
 	{
 		buffer[i] = arr[i];
@@ -453,6 +453,4 @@ void Erase_row(int**& arr, int& rows, const int cols, int index)
 	}
 	delete[] arr;
 	arr = buffer;
-	arr[index] = new int[cols] {};
-	rows++;
 }
