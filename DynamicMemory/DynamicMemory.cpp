@@ -440,7 +440,7 @@ int* Erase(int* arr, int& n, int index)
 	arr = buffer;
 	return buffer;
 }
-void Erase_row(int**& arr, int& rows, const int cols, int index)
+void Erase_row(int**& arr, int& rows, const int cols, int index) //удаляет строку из двумерного динамического массива по заданному индексу
 {
 	int** buffer = new int* [rows --];
 	for (int i = 0; i < index; i++)
