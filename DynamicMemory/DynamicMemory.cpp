@@ -378,7 +378,7 @@ void Pop_col_back(int** arr, const int rows, int& cols) //удаляет сто�
 {
 	for (int i = 0; i < rows; i++)
 	{
-		int* buffer = new int[cols--] {};
+		int* buffer = new int[cols + 1] {};
 		for (int j = 0; j < cols; j++)
 		{
 			buffer[j] = arr[i][j];
@@ -386,7 +386,8 @@ void Pop_col_back(int** arr, const int rows, int& cols) //удаляет сто�
 		delete[] arr[i];
 		arr[i] = buffer;
 	}
-	cols++;
+	cols--;
+	
 }
 
 int* Pop_front(int* arr, int& n)
