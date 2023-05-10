@@ -415,15 +415,15 @@ void Pop_col_front(int** arr, const int rows, int& cols) //удаляет сто
 {
 	for (int i = 0; i < rows; i++)
 	{
-		int* buffer = new int[cols + 1] {};
-		for (int j = 0; j < cols; j++)
+		int* buffer = new int[cols - 1] {};
+		for (int j = 0; j < cols-1; j++)
 		{
-			buffer[j + 1] = arr[i][j];
+			buffer[j] = arr[i][j + 1];
 		}
 		delete[] arr[i];
 		arr[i] = buffer;
 	}
-	cols++;
+	cols--;
 }
 
 int* Erase(int* arr, int& n, int index)
