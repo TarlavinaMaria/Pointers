@@ -134,9 +134,9 @@ void main()
 	Pop_col_back(arr, rows, cols);
 	Print(arr, rows, cols);
 
-	/*cout << "Удаляет столбец с начала двумерного динамического массива: " << endl;
+	cout << "Удаляет столбец с начала двумерного динамического массива: " << endl;
 	Pop_col_front(arr, rows, cols);
-	Print(arr, rows, cols);*/
+	Print(arr, rows, cols);
 
 
 
