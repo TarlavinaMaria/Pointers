@@ -5,7 +5,7 @@ using std::cout;
 using std::endl;
 
 
-void Allocate(int** arr, const int rows, const int cols); // выделяет память под двумерный динамический массив
+int** Allocate(const int rows, const int cols); // выделяет память под двумерный динамический массив
 void Clear(int** arr, const int rows); // удаляет двумерный динамический массив
 
 void FillRand(int arr[], const int n);
@@ -89,7 +89,7 @@ void main()
 	cout << "Введите количество столбцов: "; cin >> cols;
 	int** arr = new int* [rows];
 
-	Allocate(arr, rows, cols);
+	arr = Allocate(rows, cols);
 	FillRand(arr, rows, cols);
 	Print(arr, rows, cols);
 
@@ -161,12 +161,14 @@ void main()
 
 }
 
-void Allocate(int** arr, const int rows, const int cols) // выделяет память под двумерный динамический массив
+int** Allocate(const int rows, const int cols) // выделяет память под двумерный динамический массив
 {
+	int** arr = new int* [rows];
 	for (int i = 0; i < rows; i++)
 	{
 		arr[i] = new int[cols];
 	}
+	return arr;
 }
 
 void Clear(int** arr, const int rows) // удаляет двумерный динамический массив
