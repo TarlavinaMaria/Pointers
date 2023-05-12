@@ -122,30 +122,30 @@ void main()
 	Erase_row(arr, rows, cols, index);
 	Print(arr, rows, cols);*/
 
-	//cout << "Добавляет пустой столбец в конец двумерного динамического массива: " << endl;
-	//Push_col_back(arr, rows, cols);
-	//Print(arr, rows, cols);
+	cout << "Добавляет пустой столбец в конец двумерного динамического массива: " << endl;
+	Push_col_back(arr, rows, cols);
+	Print(arr, rows, cols);
 
-	//cout << "Добавляет пустой столбец в начало двумерного динамического массива: " << endl;
-	//Push_col_front(arr, rows, cols);
-	//Print(arr, rows, cols);
-	//
-	//int index;
-	//cout << "Введите индекс добавляемого столбца: "; cin >> index;
-	//Insert_col(arr, rows, cols, index);
-	//Print(arr, rows, cols);
+	cout << "Добавляет пустой столбец в начало двумерного динамического массива: " << endl;
+	Push_col_front(arr, rows, cols);
+	Print(arr, rows, cols);
+	
+	int index;
+	cout << "Введите индекс добавляемого столбца: "; cin >> index;
+	Insert_col(arr, rows, cols, index);
+	Print(arr, rows, cols);
 
-	//cout << "Удаляет столбец с конца двумерного динамического массива: " << endl;
-	//Pop_col_back(arr, rows, cols);
-	//Print(arr, rows, cols);
+	cout << "Удаляет столбец с конца двумерного динамического массива: " << endl;
+	Pop_col_back(arr, rows, cols);
+	Print(arr, rows, cols);
 
-	//cout << "Удаляет столбец с начала двумерного динамического массива: " << endl;
-	//Pop_col_front(arr, rows, cols);
-	//Print(arr, rows, cols);
+	cout << "Удаляет столбец с начала двумерного динамического массива: " << endl;
+	Pop_col_front(arr, rows, cols);
+	Print(arr, rows, cols);
 
-	//cout << "Введите индекс удаляемой столца: "; cin >> index;
-	//Erase_cols(arr, rows, cols, index);
-	//Print(arr, rows, cols);
+	cout << "Введите индекс удаляемой столца: "; cin >> index;
+	Erase_cols(arr, rows, cols, index);
+	Print(arr, rows, cols);
 
 
 	Clear(arr, rows);
@@ -472,11 +472,12 @@ void Erase_cols(int** arr, const int rows, int& cols, int index) //удаляе�
 		{
 			buffer[j] = arr[i][j];
 		}
-		for (int j = index; j < cols; j++)
+		for (int j = index; j < cols-1; j++)
 		{
-			buffer[j + 1] = arr[i][j];
+			buffer[j] = arr[i][j+1];
 		}
 		delete[] arr[i];
 		arr[i] = buffer;
 	}
+	cols--;
 }
