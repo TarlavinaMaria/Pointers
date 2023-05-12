@@ -36,7 +36,7 @@ void Pop_col_front(int** arr, const int rows, int& cols); //удаляет ст�
 
 int* Erase(int* arr, int& n, int index);
 void Erase_row(int**& arr, int& rows, const int cols, int index); //удаляет строку из двумерного динамического массива по заданному индексу
-
+void Erase_cols(int** arr, const int rows, int& cols, int index); //удаляет столбец из двумерного динамического массива по заданному индексу
 
 //#define DYNAMIC_MEMORY1
 #define DYNAMIC_MEMORY2
@@ -93,9 +93,14 @@ void main()
 	FillRand(arr, rows, cols);
 	Print(arr, rows, cols);
 
-	/*cout << "Добавляет пустую строку в конец двумерного динамического массива: " << endl;
+	cout << "Добавляет пустую строку в конец двумерного динамического массива: " << endl;
 	Push_row_back(arr, rows, cols);
 	Print(arr, rows, cols);
+
+
+
+
+	/*
 	cout << "Добавляет пустую строку в начало двумерного динамического массива: " << endl;
 	Push_row_front(arr, rows, cols);
 	Print(arr, rows, cols);
@@ -117,27 +122,30 @@ void main()
 	Erase_row(arr, rows, cols, index);
 	Print(arr, rows, cols);*/
 
-	cout << "Добавляет пустой столбец в конец двумерного динамического массива: " << endl;
-	Push_col_back(arr, rows, cols);
-	Print(arr, rows, cols);
+	//cout << "Добавляет пустой столбец в конец двумерного динамического массива: " << endl;
+	//Push_col_back(arr, rows, cols);
+	//Print(arr, rows, cols);
 
-	cout << "Добавляет пустой столбец в начало двумерного динамического массива: " << endl;
-	Push_col_front(arr, rows, cols);
-	Print(arr, rows, cols);
-	
-	int index;
-	cout << "Введите индекс добавляемого столбца: "; cin >> index;
-	Insert_col(arr, rows, cols, index);
-	Print(arr, rows, cols);
+	//cout << "Добавляет пустой столбец в начало двумерного динамического массива: " << endl;
+	//Push_col_front(arr, rows, cols);
+	//Print(arr, rows, cols);
+	//
+	//int index;
+	//cout << "Введите индекс добавляемого столбца: "; cin >> index;
+	//Insert_col(arr, rows, cols, index);
+	//Print(arr, rows, cols);
 
-	cout << "Удаляет столбец с конца двумерного динамического массива: " << endl;
-	Pop_col_back(arr, rows, cols);
-	Print(arr, rows, cols);
+	//cout << "Удаляет столбец с конца двумерного динамического массива: " << endl;
+	//Pop_col_back(arr, rows, cols);
+	//Print(arr, rows, cols);
 
-	cout << "Удаляет столбец с начала двумерного динамического массива: " << endl;
-	Pop_col_front(arr, rows, cols);
-	Print(arr, rows, cols);
+	//cout << "Удаляет столбец с начала двумерного динамического массива: " << endl;
+	//Pop_col_front(arr, rows, cols);
+	//Print(arr, rows, cols);
 
+	//cout << "Введите индекс удаляемой столца: "; cin >> index;
+	//Erase_cols(arr, rows, cols, index);
+	//Print(arr, rows, cols);
 
 
 	Clear(arr, rows);
@@ -225,7 +233,7 @@ int* Push_back(int* arr, int& n, int value)
 }
 void Push_row_back(int** &arr, int& rows, const int cols) //добавляет пустую строку в конец двумерного динамического массива
 {
-	int** buffer = new int* [rows + 1];
+	int** buffer = new int* [rows + 1] {};
 	for (int i = 0; i < rows; i++)
 	{
 		buffer[i] = arr[i];
@@ -416,7 +424,7 @@ void Pop_col_front(int** arr, const int rows, int& cols) //удаляет сто
 	for (int i = 0; i < rows; i++)
 	{
 		int* buffer = new int[cols - 1] {};
-		for (int j = 0; j < cols-1; j++)
+		for (int j = 0; j < cols - 1; j++)
 		{
 			buffer[j] = arr[i][j + 1];
 		}
@@ -454,4 +462,21 @@ void Erase_row(int**& arr, int& rows, const int cols, int index) //удаляе�
 	}
 	delete[] arr;
 	arr = buffer;
+}
+void Erase_cols(int** arr, const int rows, int& cols, int index) //удаляет столбец из двумерного динамического массива по заданному индексу
+{
+	for (int i = 0; i < rows; i++)
+	{
+		int* buffer = new int[cols - 1] {};
+		for (int j = 0; j < index; j++)
+		{
+			buffer[j] = arr[i][j];
+		}
+		for (int j = index; j < cols; j++)
+		{
+			buffer[j + 1] = arr[i][j];
+		}
+		delete[] arr[i];
+		arr[i] = buffer;
+	}
 }
