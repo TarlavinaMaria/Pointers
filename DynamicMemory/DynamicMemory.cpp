@@ -11,8 +11,8 @@ template<typename T> void Clear(T** arr, const T rows); // удаляет дву
 void FillRand(int arr[], const int n);
 void FillRand(int** arr, const int rows, const int cols);
 
-void Print(int arr[], const int n);
-void Print(int** arr, const int rows, const int cols);
+template<typename T> void Print(T** arr, const T rows, const T cols);
+template<typename T> void Print(T arr[], const T n);
 
 int* Push_back(int* arr, int& n, int value);
 int** Push_row_back(int** arr, int& rows, const int cols); //добавляет пустую строку в конец двумерного динамического массива
@@ -200,7 +200,7 @@ void FillRand(int** arr, const int rows, const int cols)
 	}
 }
 
-void Print(int arr[], const int n)
+template<typename T> void Print(T arr[], const T n)
 {
 	for (int i = 0; i < n; i++)
 	{
@@ -208,7 +208,7 @@ void Print(int arr[], const int n)
 	}
 	cout << endl;
 }
-void Print(int** arr, const int rows, const int cols)
+template<typename T> void Print(T** arr, const T rows, const T cols)
 {
 	for (int i = 0; i < rows; i++)
 	{
