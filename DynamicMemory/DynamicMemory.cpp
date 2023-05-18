@@ -5,8 +5,8 @@ using std::cout;
 using std::endl;
 
 
-template<typename T> T** Allocate(const int rows, const int cols); // выделяет память под двумерный динамический массив
-template<typename T> void Clear(T** arr, const int rows); // удаляет двумерный динамический массив
+int** Allocate(const int rows, const int cols); // выделяет память под двумерный динамический массив
+void Clear(int** arr, const int rows); // удаляет двумерный динамический массив
 
 void FillRand(int arr[], const int n);
 void FillRand(int** arr, const int rows, const int cols);
@@ -38,8 +38,8 @@ template<typename T> T* Erase(T* arr, int& n, int index);
 void Erase_row(int**& arr, int& rows, const int cols, int index); //удаляет строку из двумерного динамического массива по заданному индексу
 void Erase_cols(int** arr, const int rows, int& cols, int index); //удаляет столбец из двумерного динамического массива по заданному индексу
 
-#define DYNAMIC_MEMORY1
-//#define DYNAMIC_MEMORY2
+//#define DYNAMIC_MEMORY1
+#define DYNAMIC_MEMORY2
 
 
 void main()
@@ -161,7 +161,7 @@ void main()
 
 }
 
-template<typename T> T** Allocate(const int rows, const int cols) // выделяет память под двумерный динамический массив
+int** Allocate(const int rows, const int cols) // выделяет память под двумерный динамический массив
 {
 	int** arr = new int* [rows];
 	for (int i = 0; i < rows; i++)
@@ -171,7 +171,7 @@ template<typename T> T** Allocate(const int rows, const int cols) // выдел�
 	return arr;
 }
 
-template<typename T> void Clear(T** arr, const int rows) // удаляет двумерный динамический массив
+void Clear(int** arr, const int rows) // удаляет двумерный динамический массив
 {
 	// 1) Удаляем строки:
 	for (int i = 0; i < rows; i++)
