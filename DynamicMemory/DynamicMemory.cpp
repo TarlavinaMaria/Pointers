@@ -10,6 +10,8 @@ void Clear(int** arr, const int rows); // удаляет двумерный ди
 
 void FillRand(int arr[], const int n);
 void FillRand(int** arr, const int rows, const int cols);
+void FillRand(double** arr, const int rows, const int cols);
+
 
 template<typename T> void Print(T arr[], const int n);
 template<typename T> void Print(T** arr, const int rows, const int cols);
@@ -92,6 +94,8 @@ void main()
 	arr = Allocate(rows, cols);
 	FillRand(arr, rows, cols);
 	Print(arr, rows, cols);
+	
+	
 
 	////Вывод при помощи арифметики указателей
 	//cout << "Вывод при помощи арифметики указателей" << endl;
@@ -129,7 +133,7 @@ void main()
 	Erase_row(arr, rows, cols, index);
 	Print(arr, rows, cols);*/
 
-	cout << "Добавляет пустой столбец в конец двумерного динамического массива: " << endl;
+	/*cout << "Добавляет пустой столбец в конец двумерного динамического массива: " << endl;
 	Push_col_back(arr, rows, cols);
 	Print(arr, rows, cols);
 
@@ -152,7 +156,7 @@ void main()
 
 	cout << "Введите индекс удаляемой столца: "; cin >> index;
 	Erase_cols(arr, rows, cols, index);
-	Print(arr, rows, cols);
+	Print(arr, rows, cols);*/
 
 
 	Clear(arr, rows);
@@ -195,6 +199,16 @@ void FillRand(int** arr, const int rows, const int cols)
 		for (int j = 0; j < cols; j++)
 		{
 			arr[i][j] = rand() % 100;
+		}
+	}
+}
+void FillRand(double** arr, const int rows, const int cols)
+{
+	for (int i = 0; i < rows; i++)
+	{
+		for (int j = 0; j < cols; j++)
+		{
+			arr[i][j] = (rand() % 100)/10;
 		}
 	}
 }
