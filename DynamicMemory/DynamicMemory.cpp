@@ -5,14 +5,14 @@ using std::cout;
 using std::endl;
 
 
-template<typename T> T** Allocate(const T rows, const T cols); // выделяет память под двумерный динамический массив
-template<typename T> void Clear(T** arr, const T rows); // удаляет двумерный динамический массив
+int** Allocate(const int rows, const int cols); // выделяет память под двумерный динамический массив
+template<typename T> void Clear(T** arr, const int rows); // удаляет двумерный динамический массив
 
 void FillRand(int arr[], const int n);
 void FillRand(int** arr, const int rows, const int cols);
 
-template<typename T> void Print(T** arr, const T rows, const T cols);
-template<typename T> void Print(T arr[], const T n);
+template<typename T> void Print(T** arr, const int rows, const int cols);
+template<typename T> void Print(T arr[], const int n);
 
 int* Push_back(int* arr, int& n, int value);
 int** Push_row_back(int** arr, int& rows, const int cols); //добавляет пустую строку в конец двумерного динамического массива
@@ -161,7 +161,7 @@ void main()
 
 }
 
-template<typename T> T** Allocate(const T rows, const T cols) // выделяет память под двумерный динамический массив
+int** Allocate(const int rows, const int cols) // выделяет память под двумерный динамический массив
 {
 	int** arr = new int* [rows];
 	for (int i = 0; i < rows; i++)
@@ -171,7 +171,7 @@ template<typename T> T** Allocate(const T rows, const T cols) // выделяе�
 	return arr;
 }
 
-template<typename T> void Clear(T** arr, const T rows) // удаляет двумерный динамический массив
+template<typename T> void Clear(T** arr, const int rows) // удаляет двумерный динамический массив
 {
 	// 1) Удаляем строки:
 	for (int i = 0; i < rows; i++)
@@ -200,7 +200,7 @@ void FillRand(int** arr, const int rows, const int cols)
 	}
 }
 
-template<typename T> void Print(T arr[], const T n)
+template<typename T> void Print(T arr[], const int n)
 {
 	for (int i = 0; i < n; i++)
 	{
@@ -208,7 +208,7 @@ template<typename T> void Print(T arr[], const T n)
 	}
 	cout << endl;
 }
-template<typename T> void Print(T** arr, const T rows, const T cols)
+template<typename T> void Print(T** arr, const int rows, const int cols)
 {
 	for (int i = 0; i < rows; i++)
 	{
