@@ -6,7 +6,7 @@ using std::endl;
 
 
 int** Allocate(const int rows, const int cols); // выделяет память под двумерный динамический массив
-void Clear(int** arr, const int rows); // удаляет двумерный динамический массив
+template<typename T> void Clear(T** arr, const int rows); // удаляет двумерный динамический массив
 
 void FillRand(int arr[], const int n);
 void FillRand(int** arr, const int rows, const int cols);
@@ -174,7 +174,7 @@ int** Allocate(const int rows, const int cols) // выделяет память 
 	return arr;
 }
 
-void Clear(int** arr, const int rows) // удаляет двумерный динамический массив
+template<typename T> void Clear(T** arr, const int rows) // удаляет двумерный динамический массив
 {
 	// 1) Удаляем строки:
 	for (int i = 0; i < rows; i++)
