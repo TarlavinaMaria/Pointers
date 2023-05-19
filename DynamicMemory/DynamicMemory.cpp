@@ -5,7 +5,7 @@ using std::cout;
 using std::endl;
 
 
-template<typename T> T** Allocate(const int rows, const int cols); // выделяет память под двумерный динамический массив
+int** Allocate(const int rows, const int cols); // выделяет память под двумерный динамический массив
 template<typename T> void Clear(T** arr, const int rows); // удаляет двумерный динамический массив
 
 void FillRand(int arr[], const int n);
