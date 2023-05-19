@@ -6,13 +6,16 @@ using std::endl;
 
 #define delimiter "\n-------------------------------------------------------------------------------------------------\n"
 
-int** Allocate(const int rows, const int cols); // выделяет память под двумерный динамический массив
+template<typename T> T** Allocate(const int rows, const int cols); // выделяет память под двумерный динамический массив
 template<typename T> void Clear(T** arr, const int rows); // удаляет двумерный динамический массив
 
 void FillRand(int arr[], const int n);
+void FillRand(double arr[], const int n);
+void FillRand(char arr[], const int n);
+
 void FillRand(int** arr, const int rows, const int cols);
 void FillRand(double** arr, const int rows, const int cols);
-
+void FillRand(char** arr, const int rows, const int cols);
 
 template<typename T> void Print(T arr[], const int n);
 template<typename T> void Print(T** arr, const int rows, const int cols);
@@ -44,6 +47,7 @@ template<typename T> void Erase_cols(T** arr, const int rows, int& cols, int ind
 //#define DYNAMIC_MEMORY1
 #define DYNAMIC_MEMORY2
 
+	typedef double DataType;
 
 void main()
 {
@@ -53,11 +57,12 @@ void main()
 	// Одномерные динамические массивы
 	int n;
 	cout << "Введите размер массива: "; cin >> n;
-	int* arr = new int[n];
+	DataType* arr = new DataType[n];
+	
 	FillRand(arr, n);
 	Print(arr, n);
 
-	int value; // Добавляемое значение в value
+	DataType value; // Добавляемое значение в value
 	cout << "Введите добавляемое значение массива: "; cin >> value;
 	arr = Push_back(arr, n, value);
 	Print(arr, n);
@@ -90,9 +95,8 @@ void main()
 	int rows, cols;
 	cout << "Введите количество строк: "; cin >> rows;
 	cout << "Введите количество столбцов: "; cin >> cols;
-	int** arr = new int* [rows];
+	int** arr = Allocate<int>(rows, cols);
 
-	arr = Allocate(rows, cols);
 	FillRand(arr, rows, cols);
 	Print(arr, rows, cols);
 	cout << delimiter << endl;
@@ -178,12 +182,12 @@ void main()
 
 }
 
-int** Allocate(const int rows, const int cols) // выделяет память под двумерный динамический массив
+template<typename T> T** Allocate(const int rows, const int cols) // выделяет память под двумерный динамический массив
 {
-	int** arr = new int* [rows];
+	T** arr = new T* [rows];
 	for (int i = 0; i < rows; i++)
 	{
-		arr[i] = new int[cols];
+		arr[i] = new T[cols];
 	}
 	return arr;
 }
@@ -206,6 +210,21 @@ void FillRand(int arr[], const int n)
 		*(arr + i) = rand() % 100;
 	}
 }
+void FillRand(double arr[], const int n)
+{
+	for (int i = 0; i < n; i++)
+	{
+		*(arr + i) = rand() % 10000;
+		arr[i] /= 100;
+	}
+}
+void FillRand(char arr[], const int n)
+{
+	for (int i = 0; i < n; i++)
+	{
+		*(arr + i) = rand();
+	}
+}
 void FillRand(int** arr, const int rows, const int cols)
 {
 	for (int i = 0; i < rows; i++)
@@ -223,6 +242,16 @@ void FillRand(double** arr, const int rows, const int cols)
 		for (int j = 0; j < cols; j++)
 		{
 			arr[i][j] = (rand() % 100)/10;
+		}
+	}
+}
+void FillRand(char** arr, const int rows, const int cols)
+{
+	for (int i = 0; i < rows; i++)
+	{
+		for (int j = 0; j < cols; j++)
+		{
+			arr[i][j] = rand();
 		}
 	}
 }
@@ -447,7 +476,7 @@ template<typename T> void Pop_col_back(T** arr, const int rows, int& cols) //у�
 
 template<typename T> T* Pop_front(T* arr, int& n)
 {
-	int* buffer = new T[--n];
+	T* buffer = new T[--n];
 	for (int i = 0; i < n; i++)
 	{
 		buffer[i] = arr[i+1];
