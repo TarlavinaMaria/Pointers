@@ -291,7 +291,7 @@ template<typename T> void Push_col_back(T** arr, const int rows, int& cols) //д
 
 template<typename T> T* Push_front(T* arr, int& n, T value)
 {
-	T* buffer = new int[n + 1];
+	T* buffer = new T[n + 1];
 	buffer[0] = value;
 	for (int i = 0; i < n; i++)
 	{
@@ -331,7 +331,7 @@ template<typename T>void Push_col_front(T** arr, const int rows, int& cols) //д
 
 template<typename T> T* Insert(T* arr, int& n, T value, int index)
 {
-	T* buffer = new int[n + 1];
+	T* buffer = new T[n + 1];
 	for (int i = 0; i < index; i++)
 	{
 		buffer[i] = arr[i];
@@ -393,7 +393,7 @@ template<typename T> T* Pop_back(T* arr, int& n)
 	n--;
 	return arr;*/
 
-	T* buffer = new int[--n];
+	T* buffer = new T[--n];
 	for (int i = 0; i < n; i++)
 	{
 		buffer[i] = arr[i];
@@ -433,7 +433,7 @@ template<typename T> void Pop_col_back(T** arr, const int rows, int& cols) //у�
 
 template<typename T> T* Pop_front(T* arr, int& n)
 {
-	int* buffer = new int[--n];
+	int* buffer = new T[--n];
 	for (int i = 0; i < n; i++)
 	{
 		buffer[i] = arr[i+1];
@@ -468,7 +468,7 @@ template<typename T> void Pop_col_front(T** arr, const int rows, int& cols) //у
 
 template<typename T> T* Erase(T* arr, int& n, int index)
 {
-	T* buffer = new int[n - 1];
+	T* buffer = new T[n - 1];
 	for (int i = 0; i < index; i++)
 	{
 		buffer[i] = arr[i];
@@ -484,7 +484,7 @@ template<typename T> T* Erase(T* arr, int& n, int index)
 }
 template<typename T> void Erase_row(T**& arr, int& rows, const int cols, int index) //удаляет строку из двумерного динамического массива по заданному индексу
 {
-	int** buffer = new int* [rows --];
+	int** buffer = new T* [rows --];
 	for (int i = 0; i < index; i++)
 	{
 		buffer[i] = arr[i];
