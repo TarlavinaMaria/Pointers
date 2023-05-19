@@ -4,6 +4,7 @@ using std::cin;
 using std::cout;
 using std::endl;
 
+#define delimiter "\n-------------------------------------------------------------------------------------------------\n"
 
 int** Allocate(const int rows, const int cols); // выделяет память под двумерный динамический массив
 template<typename T> void Clear(T** arr, const int rows); // удаляет двумерный динамический массив
@@ -94,7 +95,7 @@ void main()
 	arr = Allocate(rows, cols);
 	FillRand(arr, rows, cols);
 	Print(arr, rows, cols);
-	
+	cout << delimiter << endl;
 	
 
 	////Вывод при помощи арифметики указателей
@@ -107,56 +108,69 @@ void main()
 	//	}
 	//	cout << endl;
 	//}
+	//cout << delimiter << endl;
 
 	/*cout << "Добавляет пустую строку в конец двумерного динамического массива: " << endl;
 	arr = Push_row_back(arr, rows, cols);
 	Print(arr, rows, cols);
+	cout << delimiter << endl;
 
 	cout << "Добавляет пустую строку в начало двумерного динамического массива: " << endl;
 	Push_row_front(arr, rows, cols);
 	Print(arr, rows, cols);
+	cout << delimiter << endl;
 
 	int index;
 	cout << "Введите индекс добавляемой строки: "; cin >> index;
 	Insert_row(arr, rows, cols, index);
 	Print(arr, rows, cols);
+	cout << delimiter << endl;
 
 	cout << "Удаляет последнюю строку  двумерного динамического массива: " << endl;
 	arr = Pop_row_back(arr, rows, cols);
 	Print(arr, rows, cols);
+	cout << delimiter << endl;
 
 	cout << "Удаляет нулевую строку  двумерного динамического массива: " << endl;
 	Pop_row_front(arr, rows, cols);
 	Print(arr, rows, cols);
+	cout << delimiter << endl;
 
 	cout << "Введите индекс удаляемой строки: "; cin >> index;
 	Erase_row(arr, rows, cols, index);
 	Print(arr, rows, cols);*/
+	//cout << delimiter << endl;
 
 	/*cout << "Добавляет пустой столбец в конец двумерного динамического массива: " << endl;
 	Push_col_back(arr, rows, cols);
 	Print(arr, rows, cols);
+	cout << delimiter << endl;
 
 	cout << "Добавляет пустой столбец в начало двумерного динамического массива: " << endl;
 	Push_col_front(arr, rows, cols);
 	Print(arr, rows, cols);
+	cout << delimiter << endl;
 
 	int index;
 	cout << "Введите индекс добавляемого столбца: "; cin >> index;
 	Insert_col(arr, rows, cols, index);
 	Print(arr, rows, cols);
+	cout << delimiter << endl;
 
 	cout << "Удаляет столбец с конца двумерного динамического массива: " << endl;
 	Pop_col_back(arr, rows, cols);
 	Print(arr, rows, cols);
+	cout << delimiter << endl;
 	
 	cout << "Удаляет столбец с начала двумерного динамического массива: " << endl;
 	Pop_col_front(arr, rows, cols);
 	Print(arr, rows, cols);
+	cout << delimiter << endl;
 
 	cout << "Введите индекс удаляемой столца: "; cin >> index;
 	Erase_cols(arr, rows, cols, index);
-	Print(arr, rows, cols);*/
+	Print(arr, rows, cols);
+	cout << delimiter << endl;*/
 
 
 	Clear(arr, rows);
