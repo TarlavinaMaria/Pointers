@@ -29,7 +29,7 @@ template<typename T> void Push_row_front(T **&arr, int& rows, const int cols); /
 template<typename T> void Push_col_front(T** arr, const int rows, int& cols); //добавляет пустой столбец в начало двумерного динамического массива
 
 template<typename T> T* Insert(T* arr, int& n, T value, int index);
-template<typename T> void Insert_row(T**& arr, int& rows, const int cols, int index);  //вставляет пустую строку в двумерный динамический массив по заданному индексу
+template<typename T> T** Insert_row(T** arr, int& rows, const int cols, int index);  //вставляет пустую строку в двумерный динамический массив по заданному индексу
 template<typename T> void Insert_col(T** arr, const int rows, int& cols, int index); //вставляет пустой столбец в двумерный динамический массив по заданному индексу
 
 template<typename T> T* Pop_back(T* arr, int& n);
@@ -114,7 +114,7 @@ void main()
 	//}
 	//cout << delimiter << endl;
 
-	/*cout << "Добавляет пустую строку в конец двумерного динамического массива: " << endl;
+	cout << "Добавляет пустую строку в конец двумерного динамического массива: " << endl;
 	arr = Push_row_back(arr, rows, cols);
 	Print(arr, rows, cols);
 	cout << delimiter << endl;
@@ -126,10 +126,10 @@ void main()
 
 	int index;
 	cout << "Введите индекс добавляемой строки: "; cin >> index;
-	Insert_row(arr, rows, cols, index);
+	arr = Insert_row(arr, rows, cols, index);
 	Print(arr, rows, cols);
 	cout << delimiter << endl;
-
+/*
 	cout << "Удаляет последнюю строку  двумерного динамического массива: " << endl;
 	arr = Pop_row_back(arr, rows, cols);
 	Print(arr, rows, cols);
@@ -299,23 +299,7 @@ template<typename T> T* Push_back(T* arr, int& n, T value)
 }
 template<typename T> T** Push_row_back(T** arr, int& rows, const int cols) //добавляет пустую строку в конец двумерного динамического массива
 {
-	// 1)Создаем буферный массив указателей:
-	T** buffer = new T* [rows + 1];
-	// 2) Копируем адреса строк из исходного массива в буферный:
-	for (int i = 0; i < rows; i++)
-	{
-		buffer[i] = arr[i];
-	}
-	// 3) Удаляем исходный массив указателей:
-	delete[] arr;
-	// 4) Подменяем адресс массива указателей:
-	arr = buffer;
-	// 5) Создаем новую строку:
-	arr[rows] = new T[cols] {};
-	// 6) После добавления строки нужно увеличить количество строк массива:
-	rows++;
-	// 7)
-	return arr;
+	return Push_back(arr, rows, new T[cols]{}); // Функция Push_back переопределяет массив указателей
 }
 template<typename T> void Push_col_back(T** arr, const int rows, int& cols) //добавляет пустой столбец в конец двумерного динамического массива
 {
@@ -361,13 +345,8 @@ template<typename T>void Push_col_front(T** arr, const int rows, int& cols) //д
 {
 	for (int i = 0; i < rows; i++)
 	{
-		T* buffer = new T[cols + 1] {};
-		for (int j = 0; j < cols; j++)
-		{
-			buffer[j+1] = arr[i][j];
-		}
-		delete[] arr[i];
-		arr[i] = buffer;
+		arr[i] = Push_back(arr[i], cols, T());
+		cols--; // компенсируем увеличение на один столбец
 	}
 	cols++;
 }
@@ -389,21 +368,9 @@ template<typename T> T* Insert(T* arr, int& n, T value, int index)
 	n++;
 	return arr;
 }
-template<typename T> void Insert_row(T**& arr, int& rows, const int cols, int index)
+template<typename T> T** Insert_row(T** arr, int& rows, const int cols, int index)
 {
-	T** buffer = new T* [rows + 1];
-	for (int i = 0; i < index; i++)
-	{
-		buffer[i] = arr[i];
-	}
-	for (int i = index; i < rows; i++)
-	{
-		buffer[i + 1] = arr[i];
-	}
-	delete[] arr;
-	arr = buffer;
-	arr[index] = new T[cols] {};
-	rows++;
+	return Insert(arr, rows, new T[cols]{}, index);
 }
 template<typename T> void Insert_col(T** arr, const int rows, int& cols, int index) //вставляет пустой столбец в двумерный динамический массив по заданному индексу
 {
@@ -448,30 +415,17 @@ template<typename T> T** Pop_row_back(T** arr, int& rows, const int cols) //уд
 {
 	// 1) Удаляем удаляемую строку:
 	delete[] arr[rows - 1];
-	// 2)Создаем буфер массив:
-	T** buffer = new T* [--rows];
-	// 3)Копирование адреса строк в новый массив:
-	for (int i = 0; i < rows; i++)
-	{
-		buffer[i] = arr[i];
-	}
-	// 4) Удаляем исходный массив указателей:
-	delete[] arr;
-	return buffer;
+	// 2)Переопределяем массив указателей:
+	return Pop_back(arr, rows);
 }
 template<typename T> void Pop_col_back(T** arr, const int rows, int& cols) //удаляет столбец с конца двумерного динамического массива
 {
+	cols--;
 	for (int i = 0; i < rows; i++)
 	{
-		T* buffer = new T[cols + 1] {};
-		for (int j = 0; j < cols; j++)
-		{
-			buffer[j] = arr[i][j];
-		}
-		delete[] arr[i];
-		arr[i] = buffer;
+		arr[i] = Pop_back(arr[i], cols);
+		cols;
 	}
-	cols--;
 }
 
 template<typename T> T* Pop_front(T* arr, int& n)
@@ -489,7 +443,7 @@ template<typename T> void Pop_row_front(T**& arr, int& rows, const int cols) //�
 	T** buffer = new T* [rows --] {};
 	for (int i = 0; i < rows; i++)
 	{
-		buffer[i ] = arr[i+ 1];
+		buffer[i] = arr[i+ 1];
 	}
 	delete[] arr;
 	arr = buffer;
