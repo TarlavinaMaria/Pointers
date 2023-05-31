@@ -25,7 +25,7 @@ template<typename T> T** Push_row_back(T** arr, int& rows, const int cols); //д
 template<typename T> void Push_col_back(T** arr,const int rows,  int& cols); //добавляет пустой столбец в конец двумерного динамического массива
 
 template<typename T> T* Push_front(T* arr, int& n, T value);
-template<typename T> void Push_row_front(T **&arr, int& rows, const int cols); //добавляет пустую строку в начало двумерного динамического массива
+template<typename T> T** Push_row_front(T** arr, int& rows, const int cols); //добавляет пустую строку в начало двумерного динамического массива
 template<typename T> void Push_col_front(T** arr, const int rows, int& cols); //добавляет пустой столбец в начало двумерного динамического массива
 
 template<typename T> T* Insert(T* arr, int& n, T value, int index);
@@ -120,7 +120,7 @@ void main()
 	cout << delimiter << endl;
 
 	cout << "Добавляет пустую строку в начало двумерного динамического массива: " << endl;
-	Push_row_front(arr, rows, cols);
+	arr = Push_row_front(arr, rows, cols);
 	Print(arr, rows, cols);
 	cout << delimiter << endl;
 
@@ -324,17 +324,9 @@ template<typename T> T* Push_front(T* arr, int& n, T value)
 	n++;
 	return arr;
 }
-template<typename T> void Push_row_front(T**& arr, int& rows, const int cols) //добавляет пустую строку в начало двумерного динамического массива
+template<typename T> T** Push_row_front(T** arr, int& rows, const int cols) //добавляет пустую строку в начало двумерного динамического массива
 {
-	T** buffer = new T* [rows + 1] {};
-	for (int i = 0; i < rows; i++)
-	{
-		buffer[i+1] = arr[i];
-	}
-	delete[] arr;
-	arr = buffer;
-	buffer[0] = new T[cols] {};
-	rows++;
+	return Push_front(arr, rows, new T[cols]{});
 }
 template<typename T>void Push_col_front(T** arr, const int rows, int& cols) //добавляет пустой столбец в начало двумерного динамического массива
 {
