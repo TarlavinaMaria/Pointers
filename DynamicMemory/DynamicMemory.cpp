@@ -139,11 +139,11 @@ void main()
 	arr = Pop_row_front(arr, rows, cols);
 	Print(arr, rows, cols);
 	cout << delimiter << endl;
-/*
+
 	cout << "Введите индекс удаляемой строки: "; cin >> index;
 	Erase_row(arr, rows, cols, index);
-	Print(arr, rows, cols);*/
-	//cout << delimiter << endl;
+	Print(arr, rows, cols);
+	cout << delimiter << endl;
 
 	cout << "Добавляет пустой столбец в конец двумерного динамического массива: " << endl;
 	Push_col_back(arr, rows, cols);
@@ -155,11 +155,11 @@ void main()
 	Print(arr, rows, cols);
 	cout << delimiter << endl;
 
-	/*int index;
+	int index;
 	cout << "Введите индекс добавляемого столбца: "; cin >> index;
 	Insert_col(arr, rows, cols, index);
 	Print(arr, rows, cols);
-	cout << delimiter << endl;*/
+	cout << delimiter << endl;
 
 	cout << "Удаляет столбец с конца двумерного динамического массива: " << endl;
 	Pop_col_back(arr, rows, cols);
@@ -332,7 +332,7 @@ template<typename T>void Push_col_front(T** arr, const int rows, int& cols) //д
 {
 	for (int i = 0; i < rows; i++)
 	{
-		arr[i] = Push_back(arr[i], cols, T());
+		arr[i] = Push_front(arr[i], cols, T());
 		cols--; // компенсируем увеличение на один столбец
 	}
 	cols++;
@@ -363,19 +363,10 @@ template<typename T> void Insert_col(T** arr, const int rows, int& cols, int ind
 {
 	for (int i = 0; i < rows; i++)
 	{
-		T* buffer = new T[cols + 1] {};
-		for (int j = 0; j < index; j++)
-		{
-			buffer[j] = arr[i][j];
-		}
-		for (int j = index; j < cols; j++)
-		{
-			buffer[j + 1] = arr[i][j];
-		}
-		delete[] arr[i];
-		arr[i] = buffer;
+		arr[i] = Insert(arr[i], cols, index);
+		cols++;
 	}
-	cols;
+	cols--;
 }
 
 template<typename T> T* Pop_back(T* arr, int& n)
