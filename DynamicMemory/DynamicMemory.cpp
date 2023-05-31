@@ -145,7 +145,7 @@ void main()
 	Print(arr, rows, cols);*/
 	//cout << delimiter << endl;
 
-	/*cout << "Добавляет пустой столбец в конец двумерного динамического массива: " << endl;
+	cout << "Добавляет пустой столбец в конец двумерного динамического массива: " << endl;
 	Push_col_back(arr, rows, cols);
 	Print(arr, rows, cols);
 	cout << delimiter << endl;
@@ -155,11 +155,11 @@ void main()
 	Print(arr, rows, cols);
 	cout << delimiter << endl;
 
-	int index;
+	/*int index;
 	cout << "Введите индекс добавляемого столбца: "; cin >> index;
 	Insert_col(arr, rows, cols, index);
 	Print(arr, rows, cols);
-	cout << delimiter << endl;
+	cout << delimiter << endl;*/
 
 	cout << "Удаляет столбец с конца двумерного динамического массива: " << endl;
 	Pop_col_back(arr, rows, cols);
@@ -174,7 +174,7 @@ void main()
 	cout << "Введите индекс удаляемой столца: "; cin >> index;
 	Erase_cols(arr, rows, cols, index);
 	Print(arr, rows, cols);
-	cout << delimiter << endl;*/
+	cout << delimiter << endl;
 
 
 	Clear(arr, rows);
@@ -355,7 +355,7 @@ template<typename T> T* Insert(T* arr, int& n, T value, int index)
 	n++;
 	return arr;
 }
-template<typename T> T** Insert_row(T** arr, int& rows, const int cols, int index)
+template<typename T> T** Insert_row(T** arr, int& rows, const int cols, int index) //вставляет строку из двумерного динамического массива по заданному индексу
 {
 	return Insert(arr, rows, new T[cols]{}, index);
 }
@@ -434,13 +434,8 @@ template<typename T> void Pop_col_front(T** arr, const int rows, int& cols) //у
 {
 	for (int i = 0; i < rows; i++)
 	{
-		T* buffer = new T[cols - 1] {};
-		for (int j = 0; j < cols - 1; j++)
-		{
-			buffer[j] = arr[i][j + 1];
-		}
-		delete[] arr[i];
-		arr[i] = buffer;
+		arr[i] = Pop_front(arr[i], cols);
+		cols++;
 	}
 	cols--;
 }
