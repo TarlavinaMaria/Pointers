@@ -37,7 +37,7 @@ template<typename T> T** Pop_row_back(T** arr, int& rows, const int cols); //у�
 template<typename T> void Pop_col_back(T** arr, const int rows, int& cols); //удаляет столбец с конца двумерного динамического массива
 
 template<typename T> T* Pop_front(T* arr, int& n);
-template<typename T> void Pop_row_front(T**& arr, int& rows, const int cols); //удаляет нулевую строку двумерного динамического массива
+template<typename T> T** Pop_row_front(T** arr, int& rows, const int cols); //удаляет нулевую строку двумерного динамического массива
 template<typename T> void Pop_col_front(T** arr, const int rows, int& cols); //удаляет столбец с начала двумерного динамического массива
 
 template<typename T> T* Erase(T* arr, int& n, int index);
@@ -129,17 +129,17 @@ void main()
 	arr = Insert_row(arr, rows, cols, index);
 	Print(arr, rows, cols);
 	cout << delimiter << endl;
-/*
+
 	cout << "Удаляет последнюю строку  двумерного динамического массива: " << endl;
 	arr = Pop_row_back(arr, rows, cols);
 	Print(arr, rows, cols);
 	cout << delimiter << endl;
 
 	cout << "Удаляет нулевую строку  двумерного динамического массива: " << endl;
-	Pop_row_front(arr, rows, cols);
+	arr = Pop_row_front(arr, rows, cols);
 	Print(arr, rows, cols);
 	cout << delimiter << endl;
-
+/*
 	cout << "Введите индекс удаляемой строки: "; cin >> index;
 	Erase_row(arr, rows, cols, index);
 	Print(arr, rows, cols);*/
@@ -305,15 +305,10 @@ template<typename T> void Push_col_back(T** arr, const int rows, int& cols) //д
 {
 	for (int i = 0; i < rows; i++)
 	{
-		T* buffer = new T[cols + 1] {};
-		for (int j = 0; j < cols; j++)
-		{
-			buffer[j] = arr[i][j];
-		}
-		delete[] arr[i];
-		arr[i] = buffer;
+		arr[i] = Pop_back(arr[i], cols);
+		cols++;
 	}
-	cols++;
+	 cols--;
 }
 
 template<typename T> T* Push_front(T* arr, int& n, T value)
@@ -420,12 +415,12 @@ template<typename T> T** Pop_row_back(T** arr, int& rows, const int cols) //уд
 }
 template<typename T> void Pop_col_back(T** arr, const int rows, int& cols) //удаляет столбец с конца двумерного динамического массива
 {
-	cols--;
 	for (int i = 0; i < rows; i++)
 	{
 		arr[i] = Pop_back(arr[i], cols);
-		cols;
+		cols++;
 	}
+	cols--;
 }
 
 template<typename T> T* Pop_front(T* arr, int& n)
@@ -438,15 +433,10 @@ template<typename T> T* Pop_front(T* arr, int& n)
 	delete[] arr;
 	return buffer;
 }
-template<typename T> void Pop_row_front(T**& arr, int& rows, const int cols) //удаляет нулевую строку двумерного динамического массива
+template<typename T> T** Pop_row_front(T** arr, int& rows, const int cols) //удаляет нулевую строку двумерного динамического массива
 {
-	T** buffer = new T* [rows --] {};
-	for (int i = 0; i < rows; i++)
-	{
-		buffer[i] = arr[i+ 1];
-	}
-	delete[] arr;
-	arr = buffer;
+	delete[] arr[0];
+	return Pop_front(arr, rows);
 }
 template<typename T> void Pop_col_front(T** arr, const int rows, int& cols) //удаляет столбец с начала двумерного динамического массива
 {
