@@ -457,7 +457,7 @@ template<typename T> T* Erase(T* arr, int& n, int index)
 }
 template<typename T> T** Erase_row(T** arr, int& rows, const int cols, int index) //удаляет строку из двумерного динамического массива по заданному индексу
 {
-	return Erase(arr, rows, cols, index);
+	return Erase(arr, new T[cols]{}, index);
 }
 template<typename T> void Erase_cols(T** arr, const int rows, int& cols, int index) //удаляет столбец из двумерного динамического массива по заданному индексу
 {
