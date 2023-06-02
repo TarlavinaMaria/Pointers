@@ -155,7 +155,6 @@ void main()
 	Print(arr, rows, cols);
 	cout << delimiter << endl;
 
-	int index;
 	cout << "Введите индекс добавляемого столбца: "; cin >> index;
 	Insert_col(arr, rows, cols, index);
 	Print(arr, rows, cols);
