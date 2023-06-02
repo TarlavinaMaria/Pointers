@@ -41,7 +41,7 @@ template<typename T> T** Pop_row_front(T** arr, int& rows, const int cols); //у
 template<typename T> void Pop_col_front(T** arr, const int rows, int& cols); //удаляет столбец с начала двумерного динамического массива
 
 template<typename T> T* Erase(T* arr, int& n, int index);
-template<typename T> void Erase_row(T**& arr, int& rows, const int cols, int index); //удаляет строку из двумерного динамического массива по заданному индексу
+template<typename T> T** Erase_row(T** arr, int& rows, const int cols, int index); //удаляет строку из двумерного динамического массива по заданному индексу
 template<typename T> void Erase_cols(T** arr, const int rows, int& cols, int index); //удаляет столбец из двумерного динамического массива по заданному индексу
 
 //#define DYNAMIC_MEMORY1
@@ -362,10 +362,19 @@ template<typename T> void Insert_col(T** arr, const int rows, int& cols, int ind
 {
 	for (int i = 0; i < rows; i++)
 	{
-		arr[i] = Insert(arr[i], cols, index);
-		cols++;
+		T* buffer = new T[cols + 1]{};
+		for (int j = 0; j < index; j++)
+		{
+			buffer[j] = arr[i][j];
+		}
+		for (int j = index; j < cols; j++)
+		{
+			buffer[j + 1] = arr[i][j];
+		}
+		delete[] arr[i];
+		arr[i] = buffer;
 	}
-	cols--;
+	cols++;
 }
 
 template<typename T> T* Pop_back(T* arr, int& n)
@@ -446,19 +455,9 @@ template<typename T> T* Erase(T* arr, int& n, int index)
 	n--;
 	return arr;
 }
-template<typename T> void Erase_row(T**& arr, int& rows, const int cols, int index) //удаляет строку из двумерного динамического массива по заданному индексу
+template<typename T> T** Erase_row(T** arr, int& rows, const int cols, int index) //удаляет строку из двумерного динамического массива по заданному индексу
 {
-	int** buffer = new T* [rows --];
-	for (int i = 0; i < index; i++)
-	{
-		buffer[i] = arr[i];
-	}
-	for (int i = index; i < rows; i++)
-	{
-		buffer[i + 1] = arr[i];
-	}
-	delete[] arr;
-	arr = buffer;
+	return Erase(arr, rows, cols, index);
 }
 template<typename T> void Erase_cols(T** arr, const int rows, int& cols, int index) //удаляет столбец из двумерного динамического массива по заданному индексу
 {
